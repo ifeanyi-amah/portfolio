@@ -1,32 +1,3 @@
-// // Login Form
-// document.getElementById("loginForm").addEventListener("submit", function (e) {
-//   e.preventDefault();
-
-//   let valid = true;
-
-//   const loginForm = document.getElementById("loginForm");
-
-//   if (!loginEmail.value.includes("@")) {
-//     loginEmailError.textContent = "Invalid email";
-//     valid = false;
-//   } else {
-//     loginEmailError.textContent = "";
-//   }
-
-//   if (loginPassword.value === "") {
-//     loginPassError.textContent = "Password required";
-//     valid = false;
-//   } else {
-//     loginPassError.textContent = "";
-//   }
-
-//   if (valid) {
-//     loginForm.reset();
-//     alert("Login successful (front-end only)");
-//   }
-// });
-
-
 document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
