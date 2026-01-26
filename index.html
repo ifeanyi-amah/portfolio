@@ -1,39 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Portfolio</title>
-        <link rel="stylesheet" href="css/style.css" />
-    </head>
-    <body>
-        <header>
-            <nav>
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-            </nav>
-        </header>
+<head>
+  <meta charset="UTF-8">
+  <title>Login & Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f7;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        <main>
-            <section class="hero">
-            <h1>Welcome to My Portfolio</h1>
-            <p>Hi, I'm Ifeanyi Amah, a Web Developer</p>
-            </section>
+    .container {
+      width: 360px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
 
-            <section class="projects">
-            <h2>Projects</h2>
-            <ul>
-                <li><strong>Project 1:</strong> Description of your first project.</li>
-                <li><strong>Project 2:</strong> Description of your second project.</li>
-                <!-- Add more projects -->
-            </ul>  
-            </section>
-        </main>
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-        <footer>
-            <p>&copy; 2025 [Ifeanyi]. All rights reserved.</p>
-        </footer>
-    </body>
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .error {
+      font-size: 12px;
+      color: red;
+      margin-top: 4px;
+      display: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .toggle a {
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 id="title">Login</h2>
+
+  <!-- Login Form -->
+  <form id="loginForm">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" id="loginEmail">
+      <div class="error" id="loginEmailError">Invalid email</div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword">
+      <div class="error" id="loginPasswordError">Incorrect password</div>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <!-- Register Form -->
+  <form id="registerForm" class="hidden">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" id="regEmail">
+      <div class="error" id="regEmailError">Invalid email</div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="regPassword">
+      <div class="error" id="regPasswordError">
+        Minimum 6 characters
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" id="regConfirmPassword">
+      <div class="error" id="regConfirmError">Passwords do not match</div>
+    </div>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div class="toggle">
+    <span id="toggleText">Don't have an account?</span>
+    <a id="toggleLink">Register</a>
+  </div>
+</div>
+
+<script>
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+  const toggleLink = document.getElementById("toggleLink");
+  const toggleText = document.getElementById("toggleText");
+  const title = document.getElementById("title");
+
+  toggleLink.addEventListener("click", () => {
+    loginForm.classList.toggle("hidden");
+    registerForm.classList.toggle("hidden");
+
+    if (loginForm.classList.contains("hidden")) {
+      title.textContent = "Register";
+      toggleText.textContent = "Already have an account?";
+      toggleLink.textContent = "Login";
+    } else {
+      title.textContent = "Login";
+      toggleText.textContent = "Don't have an account?";
+      toggleLink.textContent = "Register";
+    }
+  });
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  // REGISTER
+  registerForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const email = regEmail.value.trim();
+    const password = regPassword.value;
+    const confirm = regConfirmPassword.value;
+
+    let valid = true;
+
+    regEmailError.style.display =
+      isValidEmail(email) ? "none" : (valid = false, "block");
+
+    regPasswordError.style.display =
+      password.length >= 6 ? "none" : (valid = false, "block");
+
+    regConfirmError.style.display =
+      password === confirm ? "none" : (valid = false, "block");
+
+    if (!valid) return;
+
+    if (localStorage.getItem(email)) {
+      alert("User already exists");
+      return;
+    }
+
+    localStorage.setItem(email, JSON.stringify({ email, password }));
+    alert("Registration successful");
+
+    registerForm.reset();
+    toggleLink.click();
+  });
+
+  // LOGIN
+  loginForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value;
+
+    loginEmailError.style.display = "none";
+    loginPasswordError.style.display = "none";
+
+    if (!isValidEmail(email)) {
+      loginEmailError.style.display = "block";
+      return;
+    }
+
+    const user = JSON.parse(localStorage.getItem(email));
+
+    if (!user || user.password !== password) {
+      loginPasswordError.style.display = "block";
+      return;
+    }
+
+    alert("Login successful");
+    loginForm.reset();
+  });
+</script>
+
+</body>
 </html>

@@ -9,22 +9,6 @@
     <body>
         
         <div class="container">
-            <h2>Register</h2>
-            <form id="registerForm">
-                <input type="text" id="regUsername" placeholder="Username">
-                <small class="error" id="regUserError"></small>
-
-                <input type="email" id="regEmail" placeholder="Email">
-                <small class="error" id="regEmailError"></small>
-
-                <input type="password" id="regPassword" placeholder="Password">
-                <small class="error" id="regPassError"></small>
-
-                <input type="password" id="regConfirm" placeholder="Confirm Password">
-                <small class="error" id="regConfirmError"></small>
-
-                <button type="submit">Register</button>
-            </form>
 
             <h2>Login</h2>
             <form id="loginForm">
@@ -36,9 +20,15 @@
 
                 <button type="submit">Login</button>
             </form>
+
+            <div class="create-form-account">
+                <button type="submit" class="new-account"><a href="register.html">Create new account</a></button>
+            </div>
+
         </div>
 
         <script src="js/script.js"></script>
+        <script src="js/login.js"></script>
 
     </body>
 </html>
