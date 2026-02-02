@@ -4,82 +4,113 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Amah Ifeanyi | Frontend Developer</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <h1>Amah Ifeanyi</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header class="header">
+  <h1>Amah Ifeanyi</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h2>Frontend Developer</h2>
-    <p>I build clean, responsive, and user-friendly web interfaces using HTML, CSS, and JavaScript.</p>
-    <a href="#projects" class="btn">View My Work</a>
-  </section>
+<section class="hero">
+  <h2>Frontend Developer</h2>
+  <p>I build clean, responsive, and user-friendly web applications using HTML, CSS, and JavaScript.</p>
+  <a href="#projects" class="btn">View Projects</a>
+</section>
 
-  <!-- About -->
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>
-      I am a passionate frontend developer with strong fundamentals in HTML, CSS, and JavaScript.
-      I enjoy turning ideas into visually appealing and functional web applications.
-    </p>
-  </section>
+<section id="about" class="section">
+  <h2>About Me</h2>
+  <p>
+    I am a passionate frontend developer with strong fundamentals in HTML, CSS, and JavaScript.
+    I enjoy solving problems and building interactive user experiences.
+  </p>
+</section>
 
-  <!-- Skills -->
-  <section id="skills" class="section gray">
-    <h2>Skills</h2>
-    <div class="skills">
-      <span>HTML5</span>
-      <span>CSS3</span>
-      <span>JavaScript</span>
-      <span>Responsive Design</span>
-      <span>Git & GitHub</span>
+<section id="skills" class="section gray">
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>HTML5</span>
+    <span>CSS3</span>
+    <span>JavaScript</span>
+    <span>Responsive Design</span>
+    <span>Git & GitHub</span>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <h3>Login & Registration System</h3>
+      <p>HTML, CSS, JavaScript, localStorage authentication.</p>
     </div>
-  </section>
 
-  <!-- Projects -->
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-
-    <div class="projects">
-      <div class="card">
-        <h3>Login & Registration System</h3>
-        <p>Built with HTML, CSS, JavaScript, and localStorage.</p>
-      </div>
-
-      <div class="card">
-        <h3>Blog Website</h3>
-        <p>Blog homepage and post page with dark mode and reading progress bar.</p>
-      </div>
-
-      <div class="card">
-        <h3>Community Notice Board</h3>
-        <p>Local community help board with post creation and filtering.</p>
-      </div>
+    <div class="card">
+      <h3>Blog Website</h3>
+      <p>Blog homepage and post page with dark mode and reading progress bar.</p>
     </div>
-  </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section gray">
-    <h2>Contact</h2>
-    <p>Email: amahifeanyi@gmail.com</p>
-    <p>GitHub: github.com/ifeanyi-amah</p>
-  </section>
+    <div class="card">
+      <h3>Community Notice Board</h3>
+      <p>Post creation, filtering, and localStorage persistence.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2026 Amah Ifeanyi. All rights reserved.</p>
-  </footer>
+<section id="contact" class="section gray">
+  <h2>Contact</h2>
+  <p>Email: amahifeanyi@gmail.com</p>
+  <p>GitHub: github.com/ifeanyi-amah</p>
+</section>
 
+<footer class="footer">
+  <p>© <span id="year"></span> Amah Ifeanyi. All rights reserved.</p>
+</footer>
+
+<script src="script.js">
+
+  // Dark mode toggle
+const toggleBtn = document.getElementById("themeToggle");
+
+function applyTheme() {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    toggleBtn.textContent = "☀️";
+  } else {
+    toggleBtn.textContent = "🌙";
+  }
+}
+
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("dark") ? "dark" : "light"
+  );
+  applyTheme();
+});
+
+applyTheme();
+
+// Dynamic year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    document.querySelector(link.getAttribute("href"))
+      .scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+</script>
 </body>
 </html>
