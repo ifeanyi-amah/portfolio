@@ -2,229 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login & Registration</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f4f7;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .container {
-      width: 360px;
-      background: #fff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    input:focus {
-      border-color: #007bff;
-      outline: none;
-    }
-
-    .error {
-      font-size: 12px;
-      color: red;
-      margin-top: 4px;
-      display: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #007bff;
-      border: none;
-      color: #fff;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-
-    .toggle {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .toggle a {
-      color: #007bff;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amah Ifeanyi | Frontend Developer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h2 id="title">Login</h2>
+  <!-- Header -->
+  <header class="header">
+    <h1>Amah Ifeanyi</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-  <!-- Login Form -->
-  <form id="loginForm">
-    <div class="form-group">
-      <label>Email</label>
-      <input type="text" id="loginEmail">
-      <div class="error" id="loginEmailError">Invalid email</div>
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Frontend Developer</h2>
+    <p>I build clean, responsive, and user-friendly web interfaces using HTML, CSS, and JavaScript.</p>
+    <a href="#projects" class="btn">View My Work</a>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate frontend developer with strong fundamentals in HTML, CSS, and JavaScript.
+      I enjoy turning ideas into visually appealing and functional web applications.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section gray">
+    <h2>Skills</h2>
+    <div class="skills">
+      <span>HTML5</span>
+      <span>CSS3</span>
+      <span>JavaScript</span>
+      <span>Responsive Design</span>
+      <span>Git & GitHub</span>
     </div>
+  </section>
 
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="loginPassword">
-      <div class="error" id="loginPasswordError">Incorrect password</div>
-    </div>
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <h2>Projects</h2>
 
-    <button type="submit">Login</button>
-  </form>
+    <div class="projects">
+      <div class="card">
+        <h3>Login & Registration System</h3>
+        <p>Built with HTML, CSS, JavaScript, and localStorage.</p>
+      </div>
 
-  <!-- Register Form -->
-  <form id="registerForm" class="hidden">
-    <div class="form-group">
-      <label>Email</label>
-      <input type="text" id="regEmail">
-      <div class="error" id="regEmailError">Invalid email</div>
-    </div>
+      <div class="card">
+        <h3>Blog Website</h3>
+        <p>Blog homepage and post page with dark mode and reading progress bar.</p>
+      </div>
 
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="regPassword">
-      <div class="error" id="regPasswordError">
-        Minimum 6 characters
+      <div class="card">
+        <h3>Community Notice Board</h3>
+        <p>Local community help board with post creation and filtering.</p>
       </div>
     </div>
+  </section>
 
-    <div class="form-group">
-      <label>Confirm Password</label>
-      <input type="password" id="regConfirmPassword">
-      <div class="error" id="regConfirmError">Passwords do not match</div>
-    </div>
+  <!-- Contact -->
+  <section id="contact" class="section gray">
+    <h2>Contact</h2>
+    <p>Email: amahifeanyi@gmail.com</p>
+    <p>GitHub: github.com/ifeanyi-amah</p>
+  </section>
 
-    <button type="submit">Register</button>
-  </form>
-
-  <div class="toggle">
-    <span id="toggleText">Don't have an account?</span>
-    <a id="toggleLink">Register</a>
-  </div>
-</div>
-
-<script>
-  const loginForm = document.getElementById("loginForm");
-  const registerForm = document.getElementById("registerForm");
-  const toggleLink = document.getElementById("toggleLink");
-  const toggleText = document.getElementById("toggleText");
-  const title = document.getElementById("title");
-
-  toggleLink.addEventListener("click", () => {
-    loginForm.classList.toggle("hidden");
-    registerForm.classList.toggle("hidden");
-
-    if (loginForm.classList.contains("hidden")) {
-      title.textContent = "Register";
-      toggleText.textContent = "Already have an account?";
-      toggleLink.textContent = "Login";
-    } else {
-      title.textContent = "Login";
-      toggleText.textContent = "Don't have an account?";
-      toggleLink.textContent = "Register";
-    }
-  });
-
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  // REGISTER
-  registerForm.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const email = regEmail.value.trim();
-    const password = regPassword.value;
-    const confirm = regConfirmPassword.value;
-
-    let valid = true;
-
-    regEmailError.style.display =
-      isValidEmail(email) ? "none" : (valid = false, "block");
-
-    regPasswordError.style.display =
-      password.length >= 6 ? "none" : (valid = false, "block");
-
-    regConfirmError.style.display =
-      password === confirm ? "none" : (valid = false, "block");
-
-    if (!valid) return;
-
-    if (localStorage.getItem(email)) {
-      alert("User already exists");
-      return;
-    }
-
-    localStorage.setItem(email, JSON.stringify({ email, password }));
-    alert("Registration successful");
-
-    registerForm.reset();
-    toggleLink.click();
-  });
-
-  // LOGIN
-  loginForm.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const email = loginEmail.value.trim();
-    const password = loginPassword.value;
-
-    loginEmailError.style.display = "none";
-    loginPasswordError.style.display = "none";
-
-    if (!isValidEmail(email)) {
-      loginEmailError.style.display = "block";
-      return;
-    }
-
-    const user = JSON.parse(localStorage.getItem(email));
-
-    if (!user || user.password !== password) {
-      loginPasswordError.style.display = "block";
-      return;
-    }
-
-    alert("Login successful");
-    loginForm.reset();
-  });
-</script>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Amah Ifeanyi. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
